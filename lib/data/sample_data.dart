@@ -8,108 +8,108 @@ class SampleData {
   // ---------------------------- ANIME ----------------------------
   static const jjk = Media(
     key: 'jjk',
-    title: 'Jujutsu Kaisen',
-    jpTitle: '呪術廻戦',
-    subtitle: 'Shibuya Incident',
+    title: 'Shadow Exorcist',
+    jpTitle: '影の祓師',
+    subtitle: 'The Sealing Night',
     rating: 9.1,
     year: 2023,
     count: 23,
     duration: '24m',
     genres: ['Action', 'Dark Fantasy', 'Supernatural'],
     synopsis:
-        "On Halloween night, Shibuya is sealed off by a veil. Sorcerers and curses clash in the streets as Yuji and his allies race to free Gojo and stop a catastrophe that could reshape the jujutsu world forever.",
+        "On a cursed night, the city is sealed beneath an ancient barrier. Exorcists and spirits clash in the streets as a young warrior races to break the seal before an unstoppable evil reshapes the spirit world forever.",
   );
 
   static const demon = Media(
     key: 'demon',
-    title: 'Demon Slayer',
-    jpTitle: '鬼滅の刃',
-    subtitle: 'Hashira Training Arc',
+    title: 'Blade of Twilight',
+    jpTitle: '黄昏の刃',
+    subtitle: 'Final Covenant Arc',
     rating: 8.9,
     year: 2024,
     count: 8,
     duration: '24m',
     genres: ['Action', 'Fantasy', 'Supernatural'],
     synopsis:
-        "Tanjiro joins the Hashira as they begin a brutal training regimen to prepare for the looming battle against Muzan Kibutsuji and the Upper Rank demons.",
+        "A young swordsman joins the elite Covenant warriors in a grueling trial to prepare for a final confrontation against the dark lord and his army of shadow demons.",
   );
 
   static const solo = Media(
     key: 'solo',
-    title: 'Solo Leveling',
-    jpTitle: '俺だけレベルアップな件',
-    subtitle: 'Arise',
+    title: 'Infinite Ascent',
+    jpTitle: '無限の覚醒',
+    subtitle: 'Awakening',
     rating: 8.7,
     year: 2024,
     count: 12,
     duration: '24m',
     genres: ['Action', 'Fantasy', 'Adventure'],
     synopsis:
-        "Sung Jinwoo, the weakest hunter of all mankind, awakens a mysterious System that lets him grow without limit. As dungeons darken, he climbs toward a power no one has ever seen.",
+        "Ren Kagura, ranked the weakest of all fighters, unlocks a mysterious system that grants unlimited growth potential. As the rifts grow darker, he climbs toward a power no one has ever witnessed.",
   );
 
   static const frieren = Media(
     key: 'frieren',
-    title: 'Frieren',
-    jpTitle: '葬送のフリーレン',
-    subtitle: "Beyond Journey's End",
+    title: 'Eternal Wanderer',
+    jpTitle: '永遠の旅人',
+    subtitle: 'Memories Arc',
     rating: 9.4,
     year: 2023,
     count: 28,
     duration: '24m',
     genres: ['Adventure', 'Fantasy', 'Slice of Life'],
     synopsis:
-        "An elven mage who outlives her party sets out to truly understand the humans she travelled with. A quiet meditation on memory, time, and what it means to know someone.",
+        "An immortal mage who has outlived her companions sets out on a quiet journey to truly understand the mortals she once adventured with. A tender meditation on time, memory, and connection.",
   );
 
   static const dungeon = Media(
     key: 'dungeon',
-    title: 'Dungeon Meshi',
-    jpTitle: 'ダンジョン飯',
-    subtitle: 'Delicious in Dungeon',
+    title: 'Labyrinth Feasts',
+    jpTitle: '迷宮の晩餐',
+    subtitle: 'Depths Edition',
     rating: 8.6,
     year: 2024,
     count: 24,
     duration: '24m',
     genres: ['Adventure', 'Comedy', 'Fantasy'],
     synopsis:
-        "After a party loses everything to a red dragon, Laios leads them back into the dungeon — surviving on monster cuisine along the way.",
+        "After losing all their supplies to a fire dragon, a party of adventurers ventures back into the labyrinth — surviving by cooking and eating the monsters they defeat.",
   );
 
   static const bluelock = Media(
     key: 'bluelock',
-    title: 'Blue Lock',
-    jpTitle: 'ブルーロック',
-    subtitle: 'Episode Nagi',
+    title: 'Striker Zero',
+    jpTitle: 'ストライカーゼロ',
+    subtitle: 'Selection Arc',
     rating: 8.3,
     year: 2024,
     count: 14,
     duration: '24m',
     genres: ['Sports', 'Drama', 'Thriller'],
     synopsis:
-        "300 strikers are locked into a radical facility built to forge the world's greatest egoist. Only one will emerge.",
+        "Three hundred young footballers are locked inside a radical facility designed to forge the world's greatest striker. Only one will emerge victorious.",
   );
 
   static const vinland = Media(
     key: 'vinland',
-    title: 'Vinland Saga',
-    jpTitle: 'ヴィンランド・サガ',
-    subtitle: 'Season 2',
+    title: 'Northern Saga',
+    jpTitle: '北の英雄',
+    subtitle: 'Harvest Arc',
     rating: 8.8,
     year: 2023,
     count: 24,
     duration: '24m',
     genres: ['Action', 'Adventure', 'Drama'],
     synopsis:
-        "Stripped of vengeance and sold into slavery, Thorfinn must find a reason to live in a world ruled by the sword.",
+        "Stripped of vengeance and sold into bondage, a young warrior must find the will to live in a brutal world ruled by iron and blood.",
   );
 
   // ---------------------------- MANGA ----------------------------
   static const csm = Media(
     key: 'csm',
-    title: 'Chainsaw Man',
-    jpTitle: 'チェンソーマン',
-    subtitle: 'Part 2: Academy Saga',
+    title: 'Edge Reaper',
+    jpTitle: '刃の悪魔',
+    subtitle: 'School Arc',
     rating: 9.0,
     year: 2024,
     count: 162,
@@ -118,14 +118,14 @@ class SampleData {
     isManga: true,
     unread: true,
     synopsis:
-        "Denji is the Chainsaw Devil — a kid with a chainsaw for a head, hunting devils to pay off an impossible debt. Then everything gets so much weirder.",
+        "Kei is a devil-fused hunter — a young man bonded to a blade demon, fighting dark creatures to survive in a world where devils and humans clash daily.",
   );
 
   static const onepiece = Media(
     key: 'onepiece',
-    title: 'One Piece',
-    jpTitle: 'ワンピース',
-    subtitle: 'Final Saga · Egghead',
+    title: 'Endless Voyage',
+    jpTitle: '果てなき航海',
+    subtitle: 'Final Arc · Sky Fortress',
     rating: 9.3,
     year: 2024,
     count: 1118,
@@ -134,14 +134,14 @@ class SampleData {
     isManga: true,
     unread: true,
     synopsis:
-        "Monkey D. Luffy and the Straw Hats sail toward the legendary One Piece. The Final Saga pulls back the curtain on the world's deepest secrets.",
+        "Captain Rao Sunfist and his crew of misfit sailors chase a legendary treasure across uncharted seas. The Final Arc tears back the curtain on the world's oldest secrets.",
   );
 
   static const berserk = Media(
     key: 'berserk',
-    title: 'Berserk',
-    jpTitle: 'ベルセルク',
-    subtitle: 'Fantasia Arc',
+    title: 'Cursed Blade',
+    jpTitle: '呪われた剣',
+    subtitle: 'Realm Arc',
     rating: 9.4,
     year: 2024,
     count: 374,
@@ -149,14 +149,14 @@ class SampleData {
     genres: ['Dark Fantasy', 'Action', 'Tragedy'],
     isManga: true,
     synopsis:
-        "Branded for death, the lone swordsman Guts wages an endless war against demons and fate itself.",
+        "Marked for death by a god-hand, a lone black swordsman wages a relentless war against demons and a fate written in blood.",
   );
 
   static const spy = Media(
     key: 'spy',
-    title: 'Spy x Family',
-    jpTitle: 'スパイファミリー',
-    subtitle: 'Mission 102',
+    title: 'Double Veil',
+    jpTitle: '二重の仮面',
+    subtitle: 'Operation Cipher',
     rating: 8.7,
     year: 2024,
     count: 102,
@@ -165,13 +165,13 @@ class SampleData {
     isManga: true,
     unread: true,
     synopsis:
-        "A spy, an assassin, and a telepath form a fake family for the sake of world peace — none of them knowing the others' secret.",
+        "An elite agent, a ghost assassin, and a gifted child form a secret family to prevent a war — none of them knowing the others' true identity.",
   );
 
   static const apoth = Media(
     key: 'apoth',
-    title: 'The Apothecary Diaries',
-    jpTitle: '薬屋のひとりごと',
+    title: 'Court Alchemist',
+    jpTitle: '宮廷の薬師',
     subtitle: 'Volume 12',
     rating: 8.9,
     year: 2024,
@@ -180,7 +180,7 @@ class SampleData {
     genres: ['Mystery', 'Drama', 'Historical'],
     isManga: true,
     synopsis:
-        "A sharp-witted apothecary navigates poison, politics, and palace intrigue in the imperial rear court.",
+        "A razor-sharp herbalist navigates poison plots, court politics, and deadly intrigue within the walls of the imperial palace.",
   );
 
   // ---------------------------- FEEDS ----------------------------
@@ -240,45 +240,45 @@ class SampleData {
   static const List<QuizQuestion> quizQuestions = [
     QuizQuestion(
       question:
-          'Quel anime se déroule dans un monde rempli de malédictions et d’exorcistes ?',
+          'Dans quel anime un jeune guerrier combat-il des esprits dans une ville scellée par une barrière maudite ?',
       options: [
-        'Demon Slayer',
-        'Jujutsu Kaisen',
-        'Vinland Saga',
-        'Spy x Family'
+        'Blade of Twilight',
+        'Shadow Exorcist',
+        'Northern Saga',
+        'Double Veil'
       ],
       answerIndex: 1,
       explanation:
-          'Jujutsu Kaisen suit Yuji Itadori dans un monde de sorcellerie et de malédictions.',
+          'Shadow Exorcist suit un jeune exorciste dans un monde de malédictions et de barrières spirituelles.',
     ),
     QuizQuestion(
       question:
-          'Quel manga suit un pirate en quête du trésor légendaire One Piece ?',
-      options: ['Chainsaw Man', 'One Piece', 'Berserk', 'Frieren'],
+          "Quel manga met en scène un capitaine pirate à la recherche d'un trésor légendaire ?",
+      options: ['Edge Reaper', 'Endless Voyage', 'Cursed Blade', 'Eternal Wanderer'],
       answerIndex: 1,
       explanation:
-          'One Piece raconte l’histoire de Monkey D. Luffy et de son équipage pirate.',
+          "Endless Voyage raconte l'histoire du capitaine Rao Sunfist et de son équipage en quête du trésor ultime.",
     ),
     QuizQuestion(
       question:
-          'Quel titre est centré sur une famille d’espions et d’assassins ?',
+          "Quel titre présente une famille secrète formée d'un agent, d'une assassine et d'un enfant doué ?",
       options: [
-        'Solo Leveling',
-        'Demon Slayer',
-        'Spy x Family',
-        'Vinland Saga'
+        'Infinite Ascent',
+        'Blade of Twilight',
+        'Double Veil',
+        'Northern Saga'
       ],
       answerIndex: 2,
       explanation:
-          'Spy x Family met en scène un espion, une assassin et une télépathe sous couverture familiale.',
+          'Double Veil met en scène trois individus aux identités secrètes qui vivent sous couverture familiale.',
     ),
     QuizQuestion(
       question:
-          'Quel anime a un ton plus contemplatif et traite de la vie après une quête ?',
-      options: ['Frieren', 'Blue Lock', 'Dungeon Meshi', 'Chainsaw Man'],
+          "Quel anime a un ton contemplatif et explore la mémoire à travers les yeux d'une mage immortelle ?",
+      options: ['Eternal Wanderer', 'Striker Zero', 'Labyrinth Feasts', 'Edge Reaper'],
       answerIndex: 0,
       explanation:
-          'Frieren explore le temps et la mémoire après la fin d’une grande aventure.',
+          "Eternal Wanderer explore le temps et la mémoire à travers le voyage d'une mage qui a survécu à ses compagnons.",
     ),
   ];
 

@@ -19,10 +19,10 @@ class _SearchScreenState extends State<SearchScreen> {
   String q = '';
 
   static const recents = [
-    'Frieren',
-    'Solo Leveling',
+    'Eternal Wanderer',
+    'Infinite Ascent',
     'Dark fantasy',
-    'Spy x Family'
+    'Double Veil'
   ];
   static const suggestions = [
     'Action',
