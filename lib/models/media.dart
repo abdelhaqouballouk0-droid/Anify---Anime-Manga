@@ -9,7 +9,6 @@ class Media {
   final int count; // épisodes (anime) ou chapitres (manga)
   final String duration; // "24m" / "Ch. 162"
   final List<String> genres;
-  final List<String> langs; // ["SUB","DUB"]
   final bool isManga;
   final bool unread;
   final String synopsis;
@@ -24,7 +23,6 @@ class Media {
     required this.count,
     required this.duration,
     required this.genres,
-    this.langs = const ['SUB', 'DUB'],
     this.isManga = false,
     this.unread = false,
     required this.synopsis,

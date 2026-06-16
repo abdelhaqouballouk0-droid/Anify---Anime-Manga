@@ -295,8 +295,6 @@ class _HeroSpotlight extends StatelessWidget {
                   Pill('#1 Spotlight',
                       tone: PillTone.accent,
                       icon: Icon(Icons.local_fire_department_rounded)),
-                  SizedBox(width: 6),
-                  Pill('NEW EP'),
                 ]),
               ),
               Positioned(
@@ -405,8 +403,6 @@ class _AiringCard extends StatelessWidget {
                       top: 8,
                       right: 8,
                       child: Pill('EP ${media.count}', tone: PillTone.solid)),
-                  Positioned(
-                      bottom: 8, left: 8, child: Pill(media.langs.first)),
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
