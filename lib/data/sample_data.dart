@@ -201,15 +201,6 @@ class SampleData {
     frieren
   ];
 
-  static const List<ProgressItem> continueWatching = [
-    ProgressItem(media: jjk, number: 17, progress: 0.62, timeLeft: '9m left'),
-    ProgressItem(media: solo, number: 8, progress: 0.30, timeLeft: '17m left'),
-    ProgressItem(
-        media: frieren, number: 21, progress: 0.85, timeLeft: '4m left'),
-    ProgressItem(
-        media: vinland, number: 11, progress: 0.12, timeLeft: '21m left'),
-  ];
-
   static const List<ProgressItem> continueReading = [
     ProgressItem(media: csm, number: 161, progress: 0.55),
     ProgressItem(media: onepiece, number: 1117, progress: 0.40),

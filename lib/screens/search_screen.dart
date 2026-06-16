@@ -222,7 +222,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ],
                       ),
                     ),
-                    Pill(r.isManga ? 'READ' : 'WATCH',
+                    Pill(r.isManga ? 'MANGA' : 'ANIME',
                         tone: r.isManga ? PillTone.teal : PillTone.accent),
                   ],
                 ),
