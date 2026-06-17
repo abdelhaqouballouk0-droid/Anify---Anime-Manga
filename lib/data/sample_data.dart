@@ -306,33 +306,4 @@ class SampleData {
     onepiece
   ];
 
-  // Génère une liste d'épisodes pour l'écran de détails.
-  static List<Episode> episodesFor(Media m) {
-    const titles = [
-      'To Defeat the Strongest',
-      'Hidden Inventory',
-      'A New Resolve',
-      'Crossroads',
-      'The Shape of Fear',
-      'Pandemonium',
-      'Right and Wrong',
-      "Storm's Edge",
-      'Ashes and Embers',
-      'The Long Night',
-      'Severance',
-      'Daybreak',
-    ];
-    const durations = ['23:40', '24:12', '24:05', '23:58'];
-    final n = m.count.clamp(1, 12);
-    return List.generate(
-      n,
-      (i) => Episode(
-        no: i + 1,
-        title: titles[i % titles.length],
-        duration: durations[i % durations.length],
-        watched: i < 3,
-        current: i == 3,
-      ),
-    );
-  }
 }

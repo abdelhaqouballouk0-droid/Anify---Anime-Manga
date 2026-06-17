@@ -73,19 +73,3 @@ class LibraryEntry {
   bool get inProgress => current != null && total != null && current! < total!;
 }
 
-/// Un épisode dans la liste de détails.
-class Episode {
-  final int no;
-  final String title;
-  final String duration;
-  final bool watched;
-  final bool current;
-
-  const Episode({
-    required this.no,
-    required this.title,
-    required this.duration,
-    this.watched = false,
-    this.current = false,
-  });
-}

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../data/sample_data.dart';
 import '../models/media.dart';
 import '../theme/app_colors.dart';
-import '../widgets/pill.dart';
 import '../widgets/poster_art.dart';
 import '../widgets/rating_stars.dart';
 
@@ -24,7 +23,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final eps = SampleData.episodesFor(m);
     final related = [SampleData.demon, SampleData.solo, SampleData.frieren, SampleData.dungeon, SampleData.bluelock]
         .where((r) => r.key != m.key)
         .take(5)
@@ -42,9 +40,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(height: 16),
                 _synopsis(),
                 const SizedBox(height: 22),
-                _episodesHeader(),
-                const SizedBox(height: 10),
-                ...eps.map((e) => _EpisodeRow(media: m, ep: e)),
+                _infoSection(),
                 const SizedBox(height: 26),
               ]),
             ),
@@ -131,7 +127,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         Text(m.rating.toString(),
                             style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.star)),
                         const SizedBox(width: 7),
-                        Text('· ${m.count} eps', style: const TextStyle(fontSize: 11.5, color: AppColors.text3)),
+                        Text('· ${m.count} ${m.isManga ? 'ch.' : 'eps'}', style: const TextStyle(fontSize: 11.5, color: AppColors.text3)),
                       ]),
                     ],
                   ),
@@ -175,24 +171,48 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  Widget _episodesHeader() {
+  Widget _infoSection() {
+    final countLabel = m.isManga ? '${m.count} chapters' : '${m.count} episodes';
+    final typeLabel = m.isManga ? 'Manga' : 'Anime';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Show Info',
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          decoration: BoxDecoration(
+            color: const Color(0x0AFFFFFF),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0x12FFFFFF)),
+          ),
+          child: Column(
+            children: [
+              _infoRow('Type', typeLabel),
+              const Divider(color: Color(0x12FFFFFF), height: 18),
+              _infoRow(m.isManga ? 'Chapters' : 'Episodes', m.count.toString()),
+              const Divider(color: Color(0x12FFFFFF), height: 18),
+              _infoRow('Year', m.year.toString()),
+              const Divider(color: Color(0x12FFFFFF), height: 18),
+              _infoRow('Rating', '${m.rating} / 10'),
+              const Divider(color: Color(0x12FFFFFF), height: 18),
+              _infoRow('Duration', m.isManga ? countLabel : m.duration),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _infoRow(String label, String value) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text('Episodes', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: Colors.white)),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            color: const Color(0x0DFFFFFF),
-            borderRadius: BorderRadius.circular(9),
-            border: Border.all(color: const Color(0x14FFFFFF)),
-          ),
-          child: const Row(mainAxisSize: MainAxisSize.min, children: [
-            Text('Season 1', style: TextStyle(fontSize: 12.5, color: AppColors.text2, fontWeight: FontWeight.w600)),
-            SizedBox(width: 4),
-            Icon(Icons.keyboard_arrow_down_rounded, size: 16, color: AppColors.text2),
-          ]),
-        ),
+        Text(label,
+            style: const TextStyle(fontSize: 13, color: AppColors.text3, fontWeight: FontWeight.w500)),
+        Text(value,
+            style: const TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w600)),
       ],
     );
   }
@@ -304,58 +324,3 @@ class _Chip extends StatelessWidget {
 }
 
 
-class _EpisodeRow extends StatelessWidget {
-  final Media media;
-  final Episode ep;
-  const _EpisodeRow({required this.media, required this.ep});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 2),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: ep.current ? const Color(0x1A7C5CFC) : Colors.transparent,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: ep.current ? const Color(0x477C5CFC) : Colors.transparent),
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 104,
-            height: 62,
-            child: PosterArt(paletteKey: media.key, radius: 11),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(children: [
-                  Text('EP ${ep.no}',
-                      style: TextStyle(
-                          fontSize: 13, fontWeight: FontWeight.w800, color: ep.current ? AppColors.accent300 : Colors.white)),
-                  if (ep.current) ...[
-                    const SizedBox(width: 7),
-                    const Pill('New', tone: PillTone.accent),
-                  ],
-                ]),
-                const SizedBox(height: 3),
-                Text(ep.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.text2)),
-                const SizedBox(height: 4),
-                Row(children: [
-                  const Icon(Icons.schedule_rounded, size: 11, color: AppColors.text3),
-                  const SizedBox(width: 6),
-                  Text(ep.duration, style: const TextStyle(fontSize: 11, color: AppColors.text3)),
-                ]),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
