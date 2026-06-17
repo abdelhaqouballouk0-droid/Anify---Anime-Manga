@@ -49,7 +49,7 @@ enum LibStatus { watching, completed, planning, dropped, favorites }
 
 extension LibStatusLabel on LibStatus {
   String get label => switch (this) {
-        LibStatus.watching => 'Watching',
+        LibStatus.watching => 'Following',
         LibStatus.completed => 'Completed',
         LibStatus.planning => 'Planning',
         LibStatus.dropped => 'Dropped',

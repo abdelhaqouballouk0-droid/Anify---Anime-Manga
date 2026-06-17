@@ -276,7 +276,7 @@ class _LibCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white, height: 1.1)),
                 if (entry.current != null && entry.total != null) ...[
                   const SizedBox(height: 3),
-                  Text(m.isManga ? 'Ch ${entry.current}/${entry.total}' : 'EP ${entry.current}/${entry.total}',
+                  Text(m.isManga ? 'Ch ${entry.current}/${entry.total}' : '${entry.current}/${entry.total}',
                       style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: AppColors.text2)),
                 ],
               ],

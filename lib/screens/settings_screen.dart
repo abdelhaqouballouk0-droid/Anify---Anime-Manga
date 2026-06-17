@@ -84,7 +84,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
         _section('Preferences', [
-          _toggleItem(Icons.notifications_rounded, 'New episode alerts', alerts,
+          _toggleItem(Icons.notifications_rounded, 'New title alerts', alerts,
               (v) => setState(() => alerts = v), last: true),
         ]),
         _section('Appearance', [
