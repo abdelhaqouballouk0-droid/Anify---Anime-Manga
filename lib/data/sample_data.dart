@@ -184,7 +184,7 @@ class SampleData {
   );
 
   // ---------------------------- FEEDS ----------------------------
-  static const List<Media> airing = [
+  static const List<Media> newReleases = [
     jjk,
     solo,
     demon,

@@ -57,11 +57,11 @@ class HomeScreen extends StatelessWidget {
         ),
         const SizedBox(height: 26),
         const SectionHeader(
-            title: 'Currently Airing', overline: 'This week', onAction: _noop),
+            title: 'New Releases', overline: 'This week', onAction: _noop),
         _HRow(
           height: 252,
           children: [
-            for (final m in SampleData.airing)
+            for (final m in SampleData.newReleases)
               _AiringCard(media: m, onTap: () => _open(context, m)),
           ],
         ),
@@ -399,10 +399,6 @@ class _AiringCard extends StatelessWidget {
                 paletteKey: media.key,
                 radius: 14,
                 children: [
-                  Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Pill('EP ${media.count}', tone: PillTone.solid)),
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(

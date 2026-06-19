@@ -172,7 +172,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   Widget _infoSection() {
-    final countLabel = m.isManga ? '${m.count} chapters' : '${m.count} episodes';
+    final countLabel = '${m.count} ${m.isManga ? 'chapters' : 'entries'}';
     final typeLabel = m.isManga ? 'Manga' : 'Anime';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,13 +191,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
             children: [
               _infoRow('Type', typeLabel),
               const Divider(color: Color(0x12FFFFFF), height: 18),
-              _infoRow(m.isManga ? 'Chapters' : 'Episodes', m.count.toString()),
+              _infoRow(m.isManga ? 'Chapters' : 'Entries', m.count.toString()),
               const Divider(color: Color(0x12FFFFFF), height: 18),
               _infoRow('Year', m.year.toString()),
               const Divider(color: Color(0x12FFFFFF), height: 18),
               _infoRow('Rating', '${m.rating} / 10'),
               const Divider(color: Color(0x12FFFFFF), height: 18),
-              _infoRow('Duration', m.isManga ? countLabel : m.duration),
+              _infoRow('Count', countLabel),
             ],
           ),
         ),
