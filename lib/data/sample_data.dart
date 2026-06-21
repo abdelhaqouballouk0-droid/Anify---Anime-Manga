@@ -189,13 +189,6 @@ class SampleData {
     frieren
   ];
 
-  static const List<ProgressItem> continueReading = [
-    ProgressItem(media: csm, number: 161, progress: 0.55),
-    ProgressItem(media: onepiece, number: 1117, progress: 0.40),
-    ProgressItem(media: spy, number: 101, progress: 0.78),
-    ProgressItem(media: apoth, number: 77, progress: 0.20),
-  ];
-
   // ---------------------------- LIBRARY ----------------------------
   static const List<LibraryEntry> library = [
     LibraryEntry(
@@ -241,7 +234,7 @@ class SampleData {
     ),
     QuizQuestion(
       question:
-          "Quel manga met en scène un capitaine pirate à la recherche d'un trésor légendaire ?",
+          "Quel manga met en scene un capitaine aventurier a la recherche d'un tresor legendaire ?",
       options: ['Edge Reaper', 'Endless Voyage', 'Cursed Blade', 'Eternal Wanderer'],
       answerIndex: 1,
       explanation:

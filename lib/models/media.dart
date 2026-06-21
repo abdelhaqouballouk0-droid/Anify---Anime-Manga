@@ -6,7 +6,7 @@ class Media {
   final String subtitle;
   final double rating;
   final int year;
-  final int count; // épisodes (anime) ou chapitres (manga)
+  final int count;
   final List<String> genres;
   final bool isManga;
   final bool unread;
@@ -24,21 +24,6 @@ class Media {
     this.isManga = false,
     this.unread = false,
     required this.synopsis,
-  });
-}
-
-/// Élément "en cours" : un Media + une progression.
-class ProgressItem {
-  final Media media;
-  final int number; // n° épisode ou chapitre
-  final double progress; // 0..1
-  final String? timeLeft;
-
-  const ProgressItem({
-    required this.media,
-    required this.number,
-    required this.progress,
-    this.timeLeft,
   });
 }
 
