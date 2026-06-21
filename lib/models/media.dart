@@ -7,7 +7,6 @@ class Media {
   final double rating;
   final int year;
   final int count; // épisodes (anime) ou chapitres (manga)
-  final String duration; // "24m" / "Ch. 162"
   final List<String> genres;
   final bool isManga;
   final bool unread;
@@ -21,7 +20,6 @@ class Media {
     required this.rating,
     required this.year,
     required this.count,
-    required this.duration,
     required this.genres,
     this.isManga = false,
     this.unread = false,

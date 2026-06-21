@@ -14,7 +14,6 @@ class SampleData {
     rating: 9.1,
     year: 2023,
     count: 23,
-    duration: '24m',
     genres: ['Action', 'Dark Fantasy', 'Supernatural'],
     synopsis:
         "On a cursed night, the city is sealed beneath an ancient barrier. Exorcists and spirits clash in the streets as a young warrior races to break the seal before an unstoppable evil reshapes the spirit world forever.",
@@ -28,7 +27,6 @@ class SampleData {
     rating: 8.9,
     year: 2024,
     count: 8,
-    duration: '24m',
     genres: ['Action', 'Fantasy', 'Supernatural'],
     synopsis:
         "A young swordsman joins the elite Covenant warriors in a grueling trial to prepare for a final confrontation against the dark lord and his army of shadow demons.",
@@ -42,7 +40,6 @@ class SampleData {
     rating: 8.7,
     year: 2024,
     count: 12,
-    duration: '24m',
     genres: ['Action', 'Fantasy', 'Adventure'],
     synopsis:
         "Ren Kagura, ranked the weakest of all fighters, unlocks a mysterious system that grants unlimited growth potential. As the rifts grow darker, he climbs toward a power no one has ever witnessed.",
@@ -56,7 +53,6 @@ class SampleData {
     rating: 9.4,
     year: 2023,
     count: 28,
-    duration: '24m',
     genres: ['Adventure', 'Fantasy', 'Slice of Life'],
     synopsis:
         "An immortal mage who has outlived her companions sets out on a quiet journey to truly understand the mortals she once adventured with. A tender meditation on time, memory, and connection.",
@@ -70,7 +66,6 @@ class SampleData {
     rating: 8.6,
     year: 2024,
     count: 24,
-    duration: '24m',
     genres: ['Adventure', 'Comedy', 'Fantasy'],
     synopsis:
         "After losing all their supplies to a fire dragon, a party of adventurers ventures back into the labyrinth — surviving by cooking and eating the monsters they defeat.",
@@ -84,7 +79,6 @@ class SampleData {
     rating: 8.3,
     year: 2024,
     count: 14,
-    duration: '24m',
     genres: ['Sports', 'Drama', 'Thriller'],
     synopsis:
         "Three hundred young footballers are locked inside a radical facility designed to forge the world's greatest striker. Only one will emerge victorious.",
@@ -98,7 +92,6 @@ class SampleData {
     rating: 8.8,
     year: 2023,
     count: 24,
-    duration: '24m',
     genres: ['Action', 'Adventure', 'Drama'],
     synopsis:
         "Stripped of vengeance and sold into bondage, a young warrior must find the will to live in a brutal world ruled by iron and blood.",
@@ -113,7 +106,6 @@ class SampleData {
     rating: 9.0,
     year: 2024,
     count: 162,
-    duration: 'Ch. 162',
     genres: ['Action', 'Dark Fantasy', 'Comedy'],
     isManga: true,
     unread: true,
@@ -129,7 +121,6 @@ class SampleData {
     rating: 9.3,
     year: 2024,
     count: 1118,
-    duration: 'Ch. 1118',
     genres: ['Adventure', 'Action', 'Fantasy'],
     isManga: true,
     unread: true,
@@ -145,7 +136,6 @@ class SampleData {
     rating: 9.4,
     year: 2024,
     count: 374,
-    duration: 'Ch. 374',
     genres: ['Dark Fantasy', 'Action', 'Tragedy'],
     isManga: true,
     synopsis:
@@ -160,7 +150,6 @@ class SampleData {
     rating: 8.7,
     year: 2024,
     count: 102,
-    duration: 'Ch. 102',
     genres: ['Comedy', 'Action', 'Slice of Life'],
     isManga: true,
     unread: true,
@@ -176,7 +165,6 @@ class SampleData {
     rating: 8.9,
     year: 2024,
     count: 78,
-    duration: 'Ch. 78',
     genres: ['Mystery', 'Drama', 'Historical'],
     isManga: true,
     synopsis:

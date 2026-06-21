@@ -50,30 +50,30 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
   String _composeReply(String query) {
     final lower = query.toLowerCase();
-    if (lower.contains('recommande') ||
-        lower.contains('recommend') ||
-        lower.contains('sugg')) {
-      return 'Je te recommande : Jujutsu Kaisen, Demon Slayer, Solo Leveling et Chainsaw Man. Dis-moi si tu préfères action ou fantasy !';
+    if (lower.contains(‘recommande’) ||
+        lower.contains(‘recommend’) ||
+        lower.contains(‘sugg’)) {
+      return "Je te recommande : Shadow Exorcist, Blade of Twilight, Infinite Ascent et Edge Reaper. Dis-moi si tu preferes action ou fantasy !";
     }
-    if (lower.contains('manga')) {
-      return 'Pour du manga, Chainsaw Man, One Piece et Spy x Family sont d’excellents choix selon ton style. Tu veux un résumé ?';
+    if (lower.contains(‘manga’)) {
+      return "Pour du manga, Edge Reaper, Endless Voyage et Double Veil sont d’excellents choix selon ton style. Tu veux un resume ?";
     }
-    if (lower.contains('anime')) {
-      return 'Pour un anime récent, essaie Jujutsu Kaisen ou Demon Slayer. Pour quelque chose de plus posé, Frieren est top.';
+    if (lower.contains(‘anime’)) {
+      return "Pour un anime recent, essaie Shadow Exorcist ou Blade of Twilight. Pour quelque chose de plus pose, Eternal Wanderer est top.";
     }
     for (final m in SampleData.searchPool) {
       if (lower.contains(m.title.toLowerCase()) ||
           lower.contains(m.jpTitle.toLowerCase())) {
-        return '${m.title} (${m.jpTitle}) : ${m.synopsis}';
+        return "${m.title} (${m.jpTitle}) : ${m.synopsis}";
       }
     }
-    if (lower.contains('quiz')) {
-      return 'Tu peux lancer le quiz depuis les paramètres ou le bouton dédié. Prêt à tester tes connaissances ?';
+    if (lower.contains(‘quiz’)) {
+      return "Tu peux lancer le quiz depuis le menu principal. Pret a tester tes connaissances ?";
     }
-    if (lower.contains('genre')) {
-      return 'Tu peux explorer des genres comme Action, Fantasy, Supernatural, Adventure ou Comedy. Quel ton veux-tu ?';
+    if (lower.contains(‘genre’)) {
+      return "Tu peux explorer des genres comme Action, Fantasy, Supernatural, Adventure ou Comedy. Quel ton veux-tu ?";
     }
-    return 'Je suis là pour t’aider avec anime et manga. Demande-moi une recommandation, un résumé ou un titre similaire.';
+    return "Je suis la pour t’aider avec anime et manga. Demande-moi une recommandation, un resume ou un titre similaire.";
   }
 
   @override
