@@ -21,8 +21,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   final _controller = TextEditingController();
   final _messages = <ChatMessage>[
     const ChatMessage(
-      text:
-          'Salut ! Je suis ton assistant anime & manga. Pose-moi une question ou demande une recommandation.',
+      text: "Bonjour ! Je suis ton assistant anime et manga. Pose-moi une question ou demande une recommandation.",
       fromUser: false,
     ),
   ];
@@ -50,15 +49,15 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
   String _composeReply(String query) {
     final lower = query.toLowerCase();
-    if (lower.contains(‘recommande’) ||
-        lower.contains(‘recommend’) ||
-        lower.contains(‘sugg’)) {
+    if (lower.contains("recommande") ||
+        lower.contains("recommend") ||
+        lower.contains("sugg")) {
       return "Je te recommande : Shadow Exorcist, Blade of Twilight, Infinite Ascent et Edge Reaper. Dis-moi si tu preferes action ou fantasy !";
     }
-    if (lower.contains(‘manga’)) {
-      return "Pour du manga, Edge Reaper, Endless Voyage et Double Veil sont d’excellents choix selon ton style. Tu veux un resume ?";
+    if (lower.contains("manga")) {
+      return "Pour du manga, Edge Reaper, Endless Voyage et Double Veil sont d'excellents choix. Tu veux un resume ?";
     }
-    if (lower.contains(‘anime’)) {
+    if (lower.contains("anime")) {
       return "Pour un anime recent, essaie Shadow Exorcist ou Blade of Twilight. Pour quelque chose de plus pose, Eternal Wanderer est top.";
     }
     for (final m in SampleData.searchPool) {
@@ -67,24 +66,24 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         return "${m.title} (${m.jpTitle}) : ${m.synopsis}";
       }
     }
-    if (lower.contains(‘quiz’)) {
+    if (lower.contains("quiz")) {
       return "Tu peux lancer le quiz depuis le menu principal. Pret a tester tes connaissances ?";
     }
-    if (lower.contains(‘genre’)) {
+    if (lower.contains("genre")) {
       return "Tu peux explorer des genres comme Action, Fantasy, Supernatural, Adventure ou Comedy. Quel ton veux-tu ?";
     }
-    return "Je suis la pour t’aider avec anime et manga. Demande-moi une recommandation, un resume ou un titre similaire.";
+    return "Je suis la pour t'aider avec anime et manga. Demande-moi une recommandation, un resume ou un titre similaire.";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: const [
+        title: const Row(
+          children: [
             AppLogo(size: 26, withBackground: false),
             SizedBox(width: 10),
-            Text('Anime ChatBot'),
+            Text("ChatBot"),
           ],
         ),
         backgroundColor: AppColors.surface,
@@ -126,8 +125,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       child: Text(
                         message.text,
                         style: TextStyle(
-                          color:
-                              message.fromUser ? Colors.white : AppColors.text1,
+                          color: message.fromUser
+                              ? Colors.white
+                              : AppColors.text1,
                           height: 1.45,
                         ),
                       ),
@@ -154,9 +154,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       cursorColor: AppColors.accent,
                       style: const TextStyle(color: Colors.white),
                       decoration: const InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                        hintText: 'Pose une question au chatbot...',
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 14),
+                        hintText: "Pose une question...",
                         hintStyle: TextStyle(color: AppColors.text3),
                         border: InputBorder.none,
                       ),
@@ -179,7 +179,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
