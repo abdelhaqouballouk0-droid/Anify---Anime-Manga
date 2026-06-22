@@ -79,6 +79,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
           ),
         ),
         const SizedBox(height: 14),
+        // stats bar
+        _statsBar(),
+        const SizedBox(height: 14),
         // sort row
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -138,6 +141,63 @@ class _LibraryScreenState extends State<LibraryScreen> {
           ),
       ],
     );
+  }
+
+  Widget _statsBar() {
+    final anime = SampleData.library.where((e) => !e.media.isManga).length;
+    final manga = SampleData.library.where((e) => e.media.isManga).length;
+    final completed = SampleData.library.where((e) => e.status == LibStatus.completed).length;
+    final allGenres = SampleData.library.expand((e) => e.media.genres).toList();
+    final genreCount = <String, int>{};
+    for (final g in allGenres) {
+      genreCount[g] = (genreCount[g] ?? 0) + 1;
+    }
+    final topGenre = genreCount.entries.isEmpty
+        ? 'Action'
+        : (genreCount.entries.toList()
+              ..sort((a, b) => b.value.compareTo(a.value)))
+            .first
+            .key;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: const Color(0x0AFFFFFF),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: const Color(0x12FFFFFF)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _statItem('Anime', anime.toString()),
+            _vDivider(),
+            _statItem('Manga', manga.toString()),
+            _vDivider(),
+            _statItem('Completed', completed.toString()),
+            _vDivider(),
+            _statItem('Top Genre', topGenre),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _statItem(String label, String value) {
+    return Column(
+      children: [
+        Text(value,
+            style: const TextStyle(
+                fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
+        const SizedBox(height: 2),
+        Text(label,
+            style: const TextStyle(fontSize: 10, color: AppColors.text3, fontWeight: FontWeight.w500)),
+      ],
+    );
+  }
+
+  Widget _vDivider() {
+    return Container(width: 1, height: 28, color: const Color(0x14FFFFFF));
   }
 
   Widget _tabChip(LibStatus s, int count) {
