@@ -17,6 +17,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final _controller = TextEditingController();
   String q = '';
+  String _typeFilter = 'All';
 
   static const recents = [
     'Eternal Wanderer',
@@ -51,7 +52,15 @@ class _SearchScreenState extends State<SearchScreen> {
     final results = query.isEmpty
         ? const <Media>[]
         : SampleData.searchPool
-            .where((m) => m.title.toLowerCase().contains(query.toLowerCase()))
+            .where((m) {
+              final matchesQuery =
+                  m.title.toLowerCase().contains(query.toLowerCase()) ||
+                  m.genres.any((g) => g.toLowerCase().contains(query.toLowerCase()));
+              final matchesType = _typeFilter == 'All' ||
+                  (_typeFilter == 'Anime' && !m.isManga) ||
+                  (_typeFilter == 'Manga' && m.isManga);
+              return matchesQuery && matchesType;
+            })
             .toList();
     final matchedSuggestions = query.isEmpty
         ? suggestions
@@ -135,6 +144,16 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ],
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 0, 14, 10),
+              child: Row(children: [
+                _typeChip('All'),
+                const SizedBox(width: 8),
+                _typeChip('Anime'),
+                const SizedBox(width: 8),
+                _typeChip('Manga'),
+              ]),
             ),
             Expanded(
               child: query.isEmpty
@@ -302,6 +321,29 @@ class _SearchScreenState extends State<SearchScreen> {
         for (var i = 0; i < SampleData.trending.length; i++)
           _trendRow(i + 1, SampleData.trending[i]),
       ],
+    );
+  }
+
+  Widget _typeChip(String label) {
+    final on = _typeFilter == label;
+    return GestureDetector(
+      onTap: () => setState(() => _typeFilter = label),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: on ? AppColors.accent : const Color(0x0FFFFFFF),
+          borderRadius: BorderRadius.circular(999),
+          border: Border.all(
+            color: on ? AppColors.accent : const Color(0x14FFFFFF),
+          ),
+        ),
+        child: Text(label,
+            style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: on ? Colors.white : AppColors.text2)),
+      ),
     );
   }
 

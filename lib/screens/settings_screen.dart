@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../data/sample_data.dart';
+import '../models/media.dart';
 import '../theme/app_colors.dart';
 import '../widgets/poster_art.dart';
 import 'chatbot_screen.dart';
@@ -21,6 +23,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final totalTitles = SampleData.library.length;
+    final animeCount = SampleData.library.where((e) => !e.media.isManga).length;
+    final mangaCount = SampleData.library.where((e) => e.media.isManga).length;
+    final completedCount = SampleData.library.where((e) => e.status == LibStatus.completed).length;
+    final completionPct = totalTitles > 0 ? (completedCount * 100 ~/ totalTitles) : 0;
+    final allGenres = SampleData.library.expand((e) => e.media.genres).toList();
+    final genreCount = <String, int>{};
+    for (final g in allGenres) genreCount[g] = (genreCount[g] ?? 0) + 1;
+    final topGenre = genreCount.entries.isEmpty
+        ? 'Action'
+        : (genreCount.entries.toList()..sort((a, b) => b.value.compareTo(a.value))).first.key;
+
     return ListView(
       padding: const EdgeInsets.only(top: 4, bottom: 100),
       children: [
@@ -65,18 +79,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               const SizedBox(width: 14),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Kaito',
+                    const Text('Kaito',
                         style: TextStyle(
                             fontSize: 16.5,
                             fontWeight: FontWeight.w800,
                             color: Colors.white)),
-                    SizedBox(height: 2),
-                    Text('248 titles in library',
-                        style: TextStyle(fontSize: 12, color: AppColors.text2)),
+                    const SizedBox(height: 2),
+                    Text('$totalTitles titles in library',
+                        style: const TextStyle(fontSize: 12, color: AppColors.text2)),
+                    const SizedBox(height: 10),
+                    Row(children: [
+                      _miniStat('$animeCount', 'Anime'),
+                      const SizedBox(width: 16),
+                      _miniStat('$mangaCount', 'Manga'),
+                      const SizedBox(width: 16),
+                      _miniStat('$completionPct%', 'Done'),
+                      const SizedBox(width: 16),
+                      _miniStat(topGenre, 'Top Genre'),
+                    ]),
                   ],
                 ),
               ),
@@ -208,6 +232,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _miniStat(String value, String label) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(value,
+            style: const TextStyle(
+                fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
+        Text(label,
+            style: const TextStyle(fontSize: 10, color: AppColors.text2)),
+      ],
     );
   }
 

@@ -22,6 +22,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   final _noteController = TextEditingController();
   bool _editingNote = false;
   String _userNote = '';
+  LibStatus? _libraryStatus;
 
   Media get m => widget.media;
 
@@ -50,6 +51,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 _genres(),
+                const SizedBox(height: 12),
+                _addToLibraryButton(),
                 const SizedBox(height: 16),
                 _synopsis(),
                 const SizedBox(height: 22),
@@ -397,6 +400,115 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _addToLibraryButton() {
+    final status = _libraryStatus;
+    return GestureDetector(
+      onTap: _showAddToLibrarySheet,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 13),
+        decoration: BoxDecoration(
+          color: status != null ? const Color(0x0AFFFFFF) : AppColors.accent,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(
+            color: status != null ? const Color(0x24FFFFFF) : Colors.transparent,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              status != null ? Icons.bookmark_rounded : Icons.bookmark_add_rounded,
+              size: 18,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              status != null ? status.label : 'Add to Library',
+              style: const TextStyle(
+                  fontSize: 14.5, fontWeight: FontWeight.w700, color: Colors.white),
+            ),
+            if (status != null) ...[
+              const SizedBox(width: 6),
+              const Icon(Icons.expand_more_rounded, size: 16, color: AppColors.text2),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showAddToLibrarySheet() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF1A1A1F),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (_) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0x24FFFFFF),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text('Add to Library',
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
+              const SizedBox(height: 14),
+              for (final s in LibStatus.values) _statusOption(s),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _statusOption(LibStatus s) {
+    final selected = _libraryStatus == s;
+    return GestureDetector(
+      onTap: () {
+        setState(() => _libraryStatus = s);
+        Navigator.of(context).pop();
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        margin: const EdgeInsets.only(bottom: 8),
+        decoration: BoxDecoration(
+          color: selected ? const Color(0x1A7C5CFC) : const Color(0x0AFFFFFF),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: selected ? const Color(0x4A7C5CFC) : const Color(0x12FFFFFF),
+          ),
+        ),
+        child: Row(
+          children: [
+            Text(s.label,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: selected ? AppColors.accent300 : Colors.white)),
+            const Spacer(),
+            if (selected)
+              const Icon(Icons.check_rounded, size: 18, color: AppColors.accent300),
+          ],
+        ),
+      ),
     );
   }
 

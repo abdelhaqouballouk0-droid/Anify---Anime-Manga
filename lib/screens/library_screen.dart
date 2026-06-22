@@ -17,6 +17,7 @@ class LibraryScreen extends StatefulWidget {
 
 class _LibraryScreenState extends State<LibraryScreen> {
   LibStatus tab = LibStatus.watching;
+  String _sortMode = 'recent';
 
   Color _statusColor(LibStatus s) => switch (s) {
         LibStatus.watching => AppColors.statusWatching,
@@ -34,7 +35,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final entries = SampleData.library.where((e) => e.status == tab).toList();
+    var entries = SampleData.library.where((e) => e.status == tab).toList();
+    switch (_sortMode) {
+      case 'az':
+        entries.sort((a, b) => a.media.title.compareTo(b.media.title));
+      case 'rating':
+        entries.sort((a, b) => b.media.rating.compareTo(a.media.rating));
+      case 'year':
+        entries.sort((a, b) => b.media.year.compareTo(a.media.year));
+    }
     final counts = {for (final s in LibStatus.values) s: SampleData.library.where((e) => e.status == s).length};
 
     return ListView(
@@ -92,18 +101,21 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 TextSpan(text: '${entries.length}', style: const TextStyle(color: AppColors.text2, fontWeight: FontWeight.w700)),
                 TextSpan(text: ' in ${tab.label}', style: const TextStyle(color: AppColors.text3)),
               ], style: const TextStyle(fontSize: 12.5))),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
-                decoration: BoxDecoration(
-                  color: const Color(0x0DFFFFFF),
-                  borderRadius: BorderRadius.circular(9),
-                  border: Border.all(color: const Color(0x14FFFFFF)),
+              GestureDetector(
+                onTap: _showSortSheet,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0x0DFFFFFF),
+                    borderRadius: BorderRadius.circular(9),
+                    border: Border.all(color: const Color(0x14FFFFFF)),
+                  ),
+                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                    const Icon(Icons.swap_vert_rounded, size: 15, color: AppColors.text2),
+                    const SizedBox(width: 6),
+                    Text(_sortLabel, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.text2)),
+                  ]),
                 ),
-                child: const Row(mainAxisSize: MainAxisSize.min, children: [
-                  Icon(Icons.swap_vert_rounded, size: 15, color: AppColors.text2),
-                  SizedBox(width: 6),
-                  Text('Recent', style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600, color: AppColors.text2)),
-                ]),
               ),
             ],
           ),
@@ -198,6 +210,87 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   Widget _vDivider() {
     return Container(width: 1, height: 28, color: const Color(0x14FFFFFF));
+  }
+
+  String get _sortLabel => switch (_sortMode) {
+    'az' => 'A – Z',
+    'rating' => 'Rating',
+    'year' => 'Year',
+    _ => 'Recent',
+  };
+
+  void _showSortSheet() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF1A1A1F),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (_) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0x24FFFFFF),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text('Sort by',
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
+              const SizedBox(height: 14),
+              _sortOption('recent', 'Most Recent'),
+              _sortOption('az', 'Title A – Z'),
+              _sortOption('rating', 'Rating (High – Low)'),
+              _sortOption('year', 'Year (Newest)'),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _sortOption(String mode, String label) {
+    final on = _sortMode == mode;
+    return GestureDetector(
+      onTap: () {
+        setState(() => _sortMode = mode);
+        Navigator.of(context).pop();
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        margin: const EdgeInsets.only(bottom: 8),
+        decoration: BoxDecoration(
+          color: on ? const Color(0x1A7C5CFC) : const Color(0x0AFFFFFF),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: on ? const Color(0x4A7C5CFC) : const Color(0x12FFFFFF),
+          ),
+        ),
+        child: Row(
+          children: [
+            Text(label,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: on ? AppColors.accent300 : Colors.white)),
+            const Spacer(),
+            if (on)
+              const Icon(Icons.check_rounded, size: 18, color: AppColors.accent300),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _tabChip(LibStatus s, int count) {
