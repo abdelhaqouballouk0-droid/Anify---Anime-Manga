@@ -1,7 +1,7 @@
 name: nify
 description: "Nify — Your personal anime and manga info tracker."
 publish_to: 'none'
-version: 1.9.0+19
+version: 1.9.1+20
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

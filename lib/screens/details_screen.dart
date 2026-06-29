@@ -76,23 +76,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
     return SizedBox(
       height: 360,
       child: Stack(
+        clipBehavior: Clip.hardEdge,
         children: [
           Positioned.fill(
               child: PosterArt(paletteKey: m.key, radius: 0, showMotif: true)),
           Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-              child: const DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-                      AppColors.bg,
-                      Color(0x8C0D0D0F),
-                      Color(0x590D0D0F)
-                    ],
-                    stops: [0.02, 0.45, 1],
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                child: const DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        AppColors.bg,
+                        Color(0x8C0D0D0F),
+                        Color(0x590D0D0F)
+                      ],
+                      stops: [0.02, 0.45, 1],
+                    ),
                   ),
                 ),
               ),
