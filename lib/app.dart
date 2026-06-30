@@ -33,7 +33,7 @@ class _NifyAppState extends State<NifyApp> {
     ));
 
     return MaterialApp(
-      title: 'Nify - Anime & Manga',
+      title: 'Hikari - Anime & Manga',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
