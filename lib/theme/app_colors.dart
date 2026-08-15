@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Tokens couleur de Nify — Arashi.
+/// Tokens couleur de Anify.
 /// Pendant pour le `:root { --* }` du mockup HTML.
 class AppColors {
   AppColors._();

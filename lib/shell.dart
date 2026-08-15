@@ -8,18 +8,18 @@ import 'widgets/nify_bottom_nav.dart';
 
 /// Scaffold racine : IndexedStack des onglets persistants + bottom nav.
 /// Home / Library / Settings vivent dans la pile ; Search est poussé en route.
-class NifyShell extends StatefulWidget {
+class AnifyShell extends StatefulWidget {
   final ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeChanged;
 
-  const NifyShell(
+  const AnifyShell(
       {super.key, required this.themeMode, required this.onThemeChanged});
 
   @override
-  State<NifyShell> createState() => _NifyShellState();
+  State<AnifyShell> createState() => _AnifyShellState();
 }
 
-class _NifyShellState extends State<NifyShell> {
+class _AnifyShellState extends State<AnifyShell> {
   int navIndex = 0; // 0 home · 1 search · 2 library · 3 settings
 
   // Mapping nav -> page dans l'IndexedStack.
@@ -66,7 +66,7 @@ class _NifyShellState extends State<NifyShell> {
             bottom: 0,
             child: SafeArea(
               top: false,
-              child: NifyBottomNav(index: navIndex, onTap: _onTap),
+              child: AnifyBottomNav(index: navIndex, onTap: _onTap),
             ),
           ),
         ],

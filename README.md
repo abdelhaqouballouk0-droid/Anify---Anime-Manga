@@ -1,6 +1,6 @@
-# Nify — Arashi (Flutter)
+# Anify (Flutter)
 
-Port Flutter/Dart du redesign **Arashi** : application anime & manga sombre, premium, avec
+Application anime & manga sombre, premium, avec
 découverte, lecture vidéo, lecture manga et suivi de progression.
 
 Cette base reprend fidèlement le mockup HTML d'origine : palette near-black, accent indigo
@@ -36,7 +36,7 @@ flutter run        # choisis ta cible (Chrome, émulateur…)
 
 ```
 lib/
-├── main.dart                 # point d'entrée → NifyApp
+├── main.dart                 # point d'entrée → AnifyApp
 ├── app.dart                  # MaterialApp + thème
 ├── shell.dart                # Scaffold racine : bottom nav + IndexedStack
 ├── theme/

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 /// Barre de progression fine avec lueur.
-class NifyProgressBar extends StatelessWidget {
+class AnifyProgressBar extends StatelessWidget {
   final double value; // 0..1
   final Color color;
   final double height;
 
-  const NifyProgressBar({
+  const AnifyProgressBar({
     super.key,
     required this.value,
     this.color = AppColors.accent,

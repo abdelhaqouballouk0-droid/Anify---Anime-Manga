@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:nify/app.dart';
-import 'package:nify/widgets/app_logo.dart';
-import 'package:nify/widgets/nify_bottom_nav.dart';
-import 'package:nify/widgets/pill.dart';
-import 'package:nify/widgets/rating_stars.dart';
+import 'package:anify/app.dart';
+import 'package:anify/widgets/app_logo.dart';
+import 'package:anify/widgets/nify_bottom_nav.dart';
+import 'package:anify/widgets/pill.dart';
+import 'package:anify/widgets/rating_stars.dart';
 
 void main() {
   setUpAll(() {
@@ -47,13 +47,13 @@ void main() {
   });
 
   // ---------------------------------------------------------------------------
-  // NifyBottomNav
+  // AnifyBottomNav
   // ---------------------------------------------------------------------------
-  group('NifyBottomNav', () {
+  group('AnifyBottomNav', () {
     Widget buildNav({int index = 0, ValueChanged<int>? onTap}) =>
         MaterialApp(
           home: Scaffold(
-            body: NifyBottomNav(index: index, onTap: onTap ?? (_) {}),
+            body: AnifyBottomNav(index: index, onTap: onTap ?? (_) {}),
           ),
         );
 
@@ -147,24 +147,24 @@ void main() {
   });
 
   // ---------------------------------------------------------------------------
-  // NifyApp
+  // AnifyApp
   // ---------------------------------------------------------------------------
-  group('NifyApp', () {
+  group('AnifyApp', () {
     testWidgets('starts in dark mode by default', (tester) async {
-      await tester.pumpWidget(const NifyApp());
+      await tester.pumpWidget(const AnifyApp());
       await tester.pump();
       final app = tester.widget<MaterialApp>(find.byType(MaterialApp));
       expect(app.themeMode, ThemeMode.dark);
     });
 
     testWidgets('renders the bottom navigation bar', (tester) async {
-      await tester.pumpWidget(const NifyApp());
+      await tester.pumpWidget(const AnifyApp());
       await tester.pump();
-      expect(find.byType(NifyBottomNav), findsOneWidget);
+      expect(find.byType(AnifyBottomNav), findsOneWidget);
     });
 
     testWidgets('shows Home tab on launch', (tester) async {
-      await tester.pumpWidget(const NifyApp());
+      await tester.pumpWidget(const AnifyApp());
       await tester.pump();
       expect(find.text('Home'), findsOneWidget);
     });

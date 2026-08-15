@@ -10,11 +10,11 @@ class NavDestination {
 }
 
 /// Barre de navigation flottante (Home / Search / Library / Settings).
-class NifyBottomNav extends StatelessWidget {
+class AnifyBottomNav extends StatelessWidget {
   final int index;
   final ValueChanged<int> onTap;
 
-  const NifyBottomNav({super.key, required this.index, required this.onTap});
+  const AnifyBottomNav({super.key, required this.index, required this.onTap});
 
   static const _items = [
     NavDestination(Icons.home_rounded, 'Home'),

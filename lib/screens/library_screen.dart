@@ -440,7 +440,7 @@ class _LibCard extends StatelessWidget {
               left: 8,
               right: 8,
               bottom: 8,
-              child: NifyProgressBar(
+              child: AnifyProgressBar(
                 value: entry.current! / entry.total!,
                 color: m.isManga ? AppColors.teal : AppColors.accent,
               ),

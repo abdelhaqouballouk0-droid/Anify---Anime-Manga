@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'shell.dart';
 import 'theme/app_theme.dart';
 
-class NifyApp extends StatefulWidget {
-  const NifyApp({super.key});
+class AnifyApp extends StatefulWidget {
+  const AnifyApp({super.key});
 
   @override
-  State<NifyApp> createState() => _NifyAppState();
+  State<AnifyApp> createState() => _AnifyAppState();
 }
 
-class _NifyAppState extends State<NifyApp> {
+class _AnifyAppState extends State<AnifyApp> {
   ThemeMode themeMode = ThemeMode.dark;
 
   void _updateTheme(ThemeMode mode) {
@@ -33,12 +33,12 @@ class _NifyAppState extends State<NifyApp> {
     ));
 
     return MaterialApp(
-      title: 'Hikari - Anime & Manga',
+      title: 'Anify - Anime & Manga',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,
-      home: NifyShell(themeMode: themeMode, onThemeChanged: _updateTheme),
+      home: AnifyShell(themeMode: themeMode, onThemeChanged: _updateTheme),
     );
   }
 }
