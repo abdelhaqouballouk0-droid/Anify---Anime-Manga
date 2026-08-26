@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anify — Anime &amp; Manga Tracker</title>
+<meta name="description" content="Anify is a personal anime and manga companion app: discover titles, track your progress, and get quick recommendations. No account, fully offline, no tracking.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23000'/%3E%3Cpath d='M50 11 L5 88 L28 88 Z' fill='%23fff'/%3E%3Cpath d='M50 11 L95 88 L72 88 Z' fill='%23fff'/%3E%3Cpath d='M38.29 52 L61.71 52 L65.71 66 L34.29 66 Z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0D0F;
+    --surface: #16161A;
+    --surface-2: #1C1C22;
+    --text-1: #FFFFFF;
+    --text-2: rgba(255,255,255,.74);
+    --text-3: rgba(255,255,255,.46);
+    --accent: #7C5CFC;
+    --accent-300: #B6A3FF;
+    --accent-tint: rgba(124,92,252,.16);
+    --accent-border: rgba(124,92,252,.4);
+    --teal: #1DB8A0;
+    --teal-300: #6FE6CF;
+    --teal-tint: rgba(29,184,160,.14);
+    --teal-border: rgba(29,184,160,.4);
+    --hairline: rgba(255,255,255,.08);
+    --hairline-strong: rgba(255,255,255,.16);
+    --glass: rgba(8,8,12,.62);
+    --shadow: rgba(0,0,0,.45);
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --radius-pill: 999px;
+    --content-w: 42rem;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F7F8FC;
+      --surface: #FFFFFF;
+      --surface-2: #F1F3F8;
+      --text-1: #101828;
+      --text-2: #475467;
+      --text-3: #667085;
+      --accent: #7C5CFC;
+      --accent-300: #5B3DE0;
+      --accent-tint: rgba(124,92,252,.10);
+      --accent-border: rgba(124,92,252,.35);
+      --teal: #1AA490;
+      --teal-300: #0E8E7A;
+      --teal-tint: rgba(26,164,144,.10);
+      --teal-border: rgba(26,164,144,.32);
+      --hairline: #E4E7EC;
+      --hairline-strong: #D0D5DD;
+      --glass: rgba(255,255,255,.78);
+      --shadow: rgba(16,24,40,.10);
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F7F8FC;
+    --surface: #FFFFFF;
+    --surface-2: #F1F3F8;
+    --text-1: #101828;
+    --text-2: #475467;
+    --text-3: #667085;
+    --accent: #7C5CFC;
+    --accent-300: #5B3DE0;
+    --accent-tint: rgba(124,92,252,.10);
+    --accent-border: rgba(124,92,252,.35);
+    --teal: #1AA490;
+    --teal-300: #0E8E7A;
+    --teal-tint: rgba(26,164,144,.10);
+    --teal-border: rgba(26,164,144,.32);
+    --hairline: #E4E7EC;
+    --hairline-strong: #D0D5DD;
+    --glass: rgba(255,255,255,.78);
+    --shadow: rgba(16,24,40,.10);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0D0D0F;
+    --surface: #16161A;
+    --surface-2: #1C1C22;
+    --text-1: #FFFFFF;
+    --text-2: rgba(255,255,255,.74);
+    --text-3: rgba(255,255,255,.46);
+    --accent: #7C5CFC;
+    --accent-300: #B6A3FF;
+    --accent-tint: rgba(124,92,252,.16);
+    --accent-border: rgba(124,92,252,.4);
+    --teal: #1DB8A0;
+    --teal-300: #6FE6CF;
+    --teal-tint: rgba(29,184,160,.14);
+    --teal-border: rgba(29,184,160,.4);
+    --hairline: rgba(255,255,255,.08);
+    --hairline-strong: rgba(255,255,255,.16);
+    --glass: rgba(8,8,12,.62);
+    --shadow: rgba(0,0,0,.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text-1);
+  }
+
+  body {
+    margin: 0;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  a { color: inherit; }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 800; letter-spacing: -0.02em; }
+
+  p { margin: 0; }
+
+  button { font-family: inherit; cursor: pointer; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-300);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  .app {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ---------- Top bar ---------- */
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+
+  .topbar.scrolled { border-bottom-color: var(--hairline); }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    text-decoration: none;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 22.5%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .brand-mark svg { width: 100%; height: 100%; display: block; }
+
+  .brand-word {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-1);
+  }
+
+  .pills {
+    display: flex;
+    gap: .35rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .pill {
+    appearance: none;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-2);
+    font-size: .84rem;
+    font-weight: 700;
+    padding: .5rem .9rem;
+    border-radius: var(--radius-pill);
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+    white-space: nowrap;
+  }
+
+  .pill:hover { color: var(--text-1); background: var(--surface-2); }
+
+  .pill[aria-current="true"] {
+    color: var(--accent-300);
+    background: var(--accent-tint);
+    border-color: var(--accent-border);
+  }
+
+  /* ---------- Layout ---------- */
+
+  main { padding: 2.75rem 0 5rem; }
+
+  .view[hidden] { display: none; }
+
+  .prose {
+    max-width: var(--content-w);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--teal-300);
+    background: var(--teal-tint);
+    border: 1px solid var(--teal-border);
+    padding: .35rem .7rem;
+    border-radius: var(--radius-pill);
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    position: relative;
+    padding: 2rem 0 3.5rem;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 26rem;
+    background:
+      radial-gradient(38rem 20rem at 18% 20%, var(--accent-tint), transparent 60%),
+      radial-gradient(30rem 18rem at 82% 0%, var(--teal-tint), transparent 60%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: -1;
+    animation: drift 22s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glow { animation: none; }
+  }
+
+  @keyframes drift {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(1.5rem) scale(1.04); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+    line-height: 1.06;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--accent) 10%, var(--teal) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero p.lede {
+    margin-top: 1.1rem;
+    font-size: 1.05rem;
+    color: var(--text-2);
+    max-width: 34rem;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: 1.6rem;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text-2);
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    padding: .45rem .8rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .badge svg { width: 13px; height: 13px; flex-shrink: 0; color: var(--teal-300); }
+
+  /* ---------- Feature grid ---------- */
+
+  .section-head { margin-bottom: 1.5rem; }
+  .section-head h2 { font-size: 1.5rem; }
+  .section-head p { color: var(--text-2); margin-top: .5rem; max-width: 34rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+    gap: 1rem;
+    margin-top: 2.75rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: 0 12px 28px -18px var(--shadow);
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .card-icon svg { width: 19px; height: 19px; }
+
+  .card.tone-accent .card-icon { background: var(--accent-tint); color: var(--accent-300); }
+  .card.tone-teal .card-icon { background: var(--teal-tint); color: var(--teal-300); }
+
+  .card h3 { font-size: 1.02rem; font-weight: 700; }
+  .card p { margin-top: .5rem; font-size: .89rem; color: var(--text-2); }
+
+  /* ---------- Trust strip ---------- */
+
+  .trust {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .trust-item {
+    background: var(--surface);
+    padding: 1.25rem 1.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+  }
+
+  .trust-item svg { width: 17px; height: 17px; color: var(--teal-300); flex-shrink: 0; margin-top: .1rem; }
+  .trust-item strong { display: block; font-size: .88rem; font-weight: 700; }
+  .trust-item span { display: block; font-size: .8rem; color: var(--text-3); margin-top: .15rem; }
+
+  /* ---------- Legal pages ---------- */
+
+  .doc-meta {
+    color: var(--text-3);
+    font-size: .82rem;
+    margin-top: .6rem;
+  }
+
+  .doc h1 { font-size: clamp(1.7rem, 3.4vw, 2.2rem); }
+
+  .doc-body { margin-top: 2.25rem; display: flex; flex-direction: column; gap: 1.9rem; }
+
+  .doc-section h2 {
+    font-size: 1.02rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+  }
+
+  .doc-section h2::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .doc-section p, .doc-section li {
+    color: var(--text-2);
+    font-size: .93rem;
+    margin-top: .6rem;
+  }
+
+  .doc-section ul { margin: .6rem 0 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: .4rem; }
+
+  .doc-section a.inline-link { color: var(--accent-300); text-decoration: underline; text-underline-offset: 2px; }
+
+  .callout {
+    margin-top: 2.5rem;
+    border: 1px solid var(--teal-border);
+    background: var(--teal-tint);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.3rem;
+    font-size: .88rem;
+    color: var(--text-2);
+  }
+
+  .callout strong { color: var(--text-1); }
+
+  /* ---------- Contact ---------- */
+
+  .contact-card {
+    margin-top: 2.25rem;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    max-width: 30rem;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .contact-row .ico {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-tint);
+    color: var(--accent-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-row .ico svg { width: 19px; height: 19px; }
+
+  .contact-row .label { font-size: .78rem; color: var(--text-3); }
+  .contact-row .value { font-weight: 700; font-size: .98rem; margin-top: .1rem; }
+
+  .btn-mail {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: .9rem;
+    padding: .75rem 1.1rem;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    border: none;
+    transition: filter .15s ease, transform .15s ease;
+  }
+
+  .btn-mail:hover { filter: brightness(1.08); }
+  .btn-mail:active { transform: scale(.98); }
+  .btn-mail svg { width: 15px; height: 15px; }
+
+  .btn-mail.copied { background: var(--teal); }
+
+  .mail-fallback {
+    font-size: .78rem;
+    color: var(--text-3);
+    text-align: center;
+  }
+
+  .mail-fallback a { color: var(--accent-300); text-decoration: underline; text-underline-offset: 2px; }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 1.6rem;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--surface-2);
+    border: 1px solid var(--hairline-strong);
+    color: var(--text-1);
+    font-size: .85rem;
+    font-weight: 600;
+    padding: .7rem 1.1rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 12px 28px -12px var(--shadow);
+    transition: transform .25s ease;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    border-top: 1px solid var(--hairline);
+    padding: 2rem 0 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .footer-brand { display: flex; align-items: center; gap: .55rem; color: var(--text-3); font-size: .82rem; }
+  .footer-brand .brand-mark { width: 22px; height: 22px; }
+
+  .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .footer-links button {
+    background: none; border: none; padding: 0;
+    color: var(--text-3); font-size: .82rem; font-weight: 600;
+  }
+  .footer-links button:hover { color: var(--text-1); }
+
+  @media (max-width: 640px) {
+    .topbar { flex-direction: column; align-items: flex-start; gap: .8rem; }
+    .pills { justify-content: flex-start; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar" id="topbar">
+    <button class="brand" data-nav="home" aria-label="Anify — go to home">
+      <span class="brand-mark">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 11 L5 88 L28 88 Z" fill="#fff"/><path d="M50 11 L95 88 L72 88 Z" fill="#fff"/><path d="M38.29 52 L61.71 52 L65.71 66 L34.29 66 Z" fill="#fff"/></svg>
+      </span>
+      <span class="brand-word">Anify</span>
+    </button>
+    <nav class="pills" role="tablist" aria-label="Site sections">
+      <button class="pill" data-nav="home" role="tab">Home</button>
+      <button class="pill" data-nav="privacy" role="tab">Privacy Policy</button>
+      <button class="pill" data-nav="terms" role="tab">Terms of Use</button>
+      <button class="pill" data-nav="contact" role="tab">Contact</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section class="view" id="view-home" data-panel="home">
+      <div class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <span class="eyebrow">Anime &amp; manga companion</span>
+        <h1 style="margin-top:1rem;">Track what you watch.<br>Track what you <em>read</em>.</h1>
+        <p class="lede">Anify is a personal anime and manga tracker: discover titles, keep your library and progress up to date, and get quick recommendations — all without an account, all on your device.</p>
+        <div class="badge-row">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>No account needed</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Works fully offline</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>No ads, no tracking</span>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h2>What's inside</h2>
+        <p>Four screens, one habit: open Anify, see where you left off, keep going.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card tone-accent">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg></div>
+          <h3>Discover</h3>
+          <p>Browse a curated home feed and search by title, type or genre to find what to watch or read next.</p>
+        </div>
+        <div class="card tone-teal">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="16" rx="1.5"/><rect x="14" y="4" width="6" height="10" rx="1.5"/></svg></div>
+          <h3>Library &amp; progress</h3>
+          <p>Save titles, mark them Watching, Completed, Planning or Dropped, and jot down your own rating and notes.</p>
+        </div>
+        <div class="card tone-accent">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4 2.8c-.7.3-1 .9-1 1.7V14"/><circle cx="12" cy="18" r=".6" fill="currentColor" stroke="none"/></svg></div>
+          <h3>Quiz</h3>
+          <p>A short trivia round to test how well you actually know the titles in your library.</p>
+        </div>
+        <div class="card tone-teal">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.6 8.6 0 0 1-3.1-.6L4 20l1-4.5a8.3 8.3 0 0 1-1-4A8.4 8.4 0 0 1 12.9 3 8.4 8.4 0 0 1 21 11.5Z"/></svg></div>
+          <h3>Assistant</h3>
+          <p>Ask for a recommendation and get an instant suggestion pulled from Anify's own built-in dataset.</p>
+        </div>
+      </div>
+
+      <div class="trust">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <div><strong>Private by default</strong><span>Your library and progress never leave your device.</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 5-3 7.5-7 9-4-1.5-7-4-7-9V7l7-4Z"/></svg>
+          <div><strong>Nothing tracked</strong><span>No analytics SDK, no ad network, no third-party services.</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V6a2 2 0 0 1 2-2h9l5 5v10.5"/><path d="M15 4v5h5"/></svg>
+          <div><strong>Original art</strong><span>Every poster is generated in-app — no copyrighted images.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="view" id="view-privacy" data-panel="privacy" hidden>
+      <div class="prose doc">
+        <span class="eyebrow">Legal</span>
+        <h1 style="margin-top:1rem;">Privacy Policy</h1>
+        <p class="doc-meta">Last updated August 26, 2026</p>
+
+        <div class="doc-body">
+          <div class="doc-section">
+            <h2>The short version</h2>
+            <p>Anify does not collect, store, or transmit any personal data. There is nothing to opt out of, because nothing leaves your device.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Data we collect</h2>
+            <p>None. Anify does not require an account, does not ask for your name or email, and does not read your contacts, location, camera, or photos.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Where your data lives</h2>
+            <p>Anything you create inside the app — your library, watch/read progress, personal ratings, and notes — is stored locally on your device only. Uninstalling the app removes it permanently. We have no server that holds a copy.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Third-party services</h2>
+            <p>Anify does not integrate any third-party analytics, advertising, or tracking SDK. No data is shared with, or sold to, anyone, because none is collected in the first place.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Children's privacy</h2>
+            <p>Because Anify collects no personal data from any user, it does not knowingly collect data from children either. The app is safe for use by any age group with respect to data collection.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Changes to this policy</h2>
+            <p>If this policy ever changes — for example if a future version of Anify adds an optional online feature — this page will be updated and the "Last updated" date above will reflect it.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Contact</h2>
+            <p>Questions about this policy can be sent to <a class="inline-link" href="mailto:abdelhaqouballouk0@gmail.com">abdelhaqouballouk0@gmail.com</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TERMS -->
+    <section class="view" id="view-terms" data-panel="terms" hidden>
+      <div class="prose doc">
+        <span class="eyebrow">Legal</span>
+        <h1 style="margin-top:1rem;">Terms of Use</h1>
+        <p class="doc-meta">Last updated August 26, 2026</p>
+
+        <div class="doc-body">
+          <div class="doc-section">
+            <h2>Acceptance of terms</h2>
+            <p>By downloading or using Anify, you agree to these Terms of Use. If you do not agree, please do not use the app.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>What Anify is</h2>
+            <p>Anify is a personal companion app for organizing your anime and manga watching/reading habits: a home feed, search, a personal library with progress tracking, a short quiz, and a recommendation assistant. It runs entirely on your device — there is no account system and no server-backed content.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>License to use the app</h2>
+            <p>We grant you a personal, non-exclusive, non-transferable, revocable license to install and use Anify on devices you own or control, for your own non-commercial use, subject to these Terms and to the App Store's usage rules.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Content shown in the app</h2>
+            <ul>
+              <li>Titles, descriptions, cover art, and quiz questions displayed in Anify are original or fictional placeholder content created for the app, not real licensed anime/manga properties.</li>
+              <li>All poster artwork is generated procedurally inside the app — no copyrighted images are used or reproduced.</li>
+              <li>The Assistant's replies are produced by a simple built-in rule-based dataset, not a live AI or online service.</li>
+            </ul>
+          </div>
+
+          <div class="doc-section">
+            <h2>Your content</h2>
+            <p>Any rating, note, or library entry you create stays on your device and belongs to you. We have no access to it and no ability to view, back up, or restore it on your behalf.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Acceptable use</h2>
+            <p>You agree not to reverse-engineer, decompile, or redistribute the app outside of official app stores, and not to use it in any way that violates applicable law.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>No warranty</h2>
+            <p>Anify is provided "as is," without warranty of any kind, express or implied. We do not guarantee the app will be uninterrupted, error-free, or fit for any particular purpose.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Limitation of liability</h2>
+            <p>To the maximum extent permitted by law, Anify's developer is not liable for any indirect, incidental, or consequential damages arising from your use of the app, including loss of locally stored data (for example from uninstalling the app or losing your device).</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Changes to these terms</h2>
+            <p>These terms may be updated as the app evolves. Continued use of Anify after an update means you accept the revised terms.</p>
+          </div>
+
+          <div class="doc-section">
+            <h2>Contact</h2>
+            <p>Questions about these terms can be sent to <a class="inline-link" href="mailto:abdelhaqouballouk0@gmail.com">abdelhaqouballouk0@gmail.com</a>.</p>
+          </div>
+        </div>
+
+        <div class="callout"><strong>Note:</strong> this draft does not name a governing jurisdiction — add your country/state of residence to the "Changes to these terms" or a new "Governing law" section before treating it as final.</div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="view" id="view-contact" data-panel="contact" hidden>
+      <div class="prose">
+        <span class="eyebrow">Get in touch</span>
+        <h1 class="doc-h1" style="margin-top:1rem; font-size:clamp(1.7rem, 3.4vw, 2.2rem);">Contact us</h1>
+        <p style="margin-top:.8rem; color:var(--text-2); font-size:.95rem;">Bug report, privacy question, or just feedback on a recommendation the Assistant got wrong — write to us directly.</p>
+
+        <div class="contact-card">
+          <div class="contact-row">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <div>
+              <div class="label">Email</div>
+              <div class="value">abdelhaqouballouk0@gmail.com</div>
+            </div>
+          </div>
+          <a class="btn-mail" href="mailto:abdelhaqouballouk0@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Write to us
+          </a>
+          <button class="btn-mail" id="copy-email-btn" type="button" data-email="abdelhaqouballouk0@gmail.com" style="background:var(--surface-2); color:var(--text-1); border:1px solid var(--hairline-strong);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            Copy email address
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 11 L5 88 L28 88 Z" fill="#fff"/><path d="M50 11 L95 88 L72 88 Z" fill="#fff"/><path d="M38.29 52 L61.71 52 L65.71 66 L34.29 66 Z" fill="#fff"/></svg>
+      </span>
+      <span>&copy; 2026 Anify. Made for anime &amp; manga fans.</span>
+    </div>
+    <div class="footer-links">
+      <button data-nav="privacy">Privacy Policy</button>
+      <button data-nav="terms">Terms of Use</button>
+      <button data-nav="contact">Contact</button>
+    </div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
+
+<script>
+  (function () {
+    var panels = document.querySelectorAll("[data-panel]");
+    var navButtons = document.querySelectorAll("[data-nav]");
+    var validViews = ["home", "privacy", "terms", "contact"];
+
+    function showView(name, updateHash) {
+      if (validViews.indexOf(name) === -1) name = "home";
+
+      panels.forEach(function (p) {
+        p.hidden = p.getAttribute("data-panel") !== name;
+      });
+
+      navButtons.forEach(function (b) {
+        var isTab = b.getAttribute("role") === "tab";
+        if (isTab) {
+          b.setAttribute("aria-current", b.getAttribute("data-nav") === name ? "true" : "false");
+        }
+      });
+
+      if (updateHash !== false) {
+        history.replaceState(null, "", "#" + name);
+      }
+      window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    }
+
+    navButtons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        showView(b.getAttribute("data-nav"), true);
+      });
+    });
+
+    window.addEventListener("hashchange", function () {
+      showView(location.hash.replace("#", ""), false);
+    });
+
+    var topbar = document.getElementById("topbar");
+    window.addEventListener("scroll", function () {
+      topbar.classList.toggle("scrolled", window.scrollY > 4);
+    }, { passive: true });
+
+    showView(location.hash ? location.hash.replace("#", "") : "home", false);
+
+    var copyBtn = document.getElementById("copy-email-btn");
+    var toast = document.getElementById("toast");
+    var toastTimer = null;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        var email = copyBtn.getAttribute("data-email");
+        var done = function (ok) {
+          if (ok) {
+            copyBtn.classList.add("copied");
+            showToast("Email copied to clipboard");
+            setTimeout(function () { copyBtn.classList.remove("copied"); }, 1600);
+          } else {
+            showToast("Couldn't copy — use the button above");
+          }
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(function () { done(true); }, function () { done(fallbackCopy(email)); });
+        } else {
+          done(fallbackCopy(email));
+        }
+      });
+    }
+  })();
+</script>
+</body>
+</html>
