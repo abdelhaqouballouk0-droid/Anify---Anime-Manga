@@ -1,7 +1,7 @@
 name: anify
 description: "Anify — Your personal anime and manga info tracker."
 publish_to: 'none'
-version: 1.9.5+25
+version: 1.9.5+26
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
