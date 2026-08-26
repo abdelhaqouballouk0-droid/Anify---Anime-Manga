@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anify — Contact</title>
+<meta name="description" content="Get in touch about Anify: bug reports, privacy questions, or feedback.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23000'/%3E%3Cpath d='M50 11 L5 88 L28 88 Z' fill='%23fff'/%3E%3Cpath d='M50 11 L95 88 L72 88 Z' fill='%23fff'/%3E%3Cpath d='M38.29 52 L61.71 52 L65.71 66 L34.29 66 Z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar" id="topbar">
+    <a class="brand" href="/" aria-label="Anify — home">
+      <span class="brand-mark">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 11 L5 88 L28 88 Z" fill="#fff"/><path d="M50 11 L95 88 L72 88 Z" fill="#fff"/><path d="M38.29 52 L61.71 52 L65.71 66 L34.29 66 Z" fill="#fff"/></svg>
+      </span>
+      <span class="brand-word">Anify</span>
+    </a>
+    <nav class="pills" aria-label="Site sections">
+      <a class="pill" href="/">Home</a>
+      <a class="pill" href="/privacy">Privacy Policy</a>
+      <a class="pill" href="/terms">Terms of Use</a>
+      <a class="pill" href="/contact" aria-current="page">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="prose">
+      <span class="eyebrow">Get in touch</span>
+      <h1 style="margin-top:1rem; font-size:clamp(1.7rem, 3.4vw, 2.2rem);">Contact us</h1>
+      <p style="margin-top:.8rem; color:var(--text-2); font-size:.95rem;">Bug report, privacy question, or just feedback on a recommendation the Assistant got wrong — write to us directly.</p>
+
+      <div class="contact-card">
+        <div class="contact-row">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <div>
+            <div class="label">Email</div>
+            <div class="value">abdelhaqouballouk0@gmail.com</div>
+          </div>
+        </div>
+        <a class="btn-mail" href="mailto:abdelhaqouballouk0@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          Write to us
+        </a>
+        <button class="btn-mail btn-secondary" id="copy-email-btn" type="button" data-email="abdelhaqouballouk0@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+          Copy email address
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 11 L5 88 L28 88 Z" fill="#fff"/><path d="M50 11 L95 88 L72 88 Z" fill="#fff"/><path d="M38.29 52 L61.71 52 L65.71 66 L34.29 66 Z" fill="#fff"/></svg>
+      </span>
+      <span>&copy; 2026 Anify. Made for anime &amp; manga fans.</span>
+    </div>
+    <div class="footer-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Use</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
